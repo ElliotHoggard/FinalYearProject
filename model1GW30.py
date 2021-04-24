@@ -1,213 +1,17 @@
 import time
 from tkinter import *
-
-from os import listdir
 import numpy as np
 import numpy.random as nr
 import pandas as pd
 from aaa.modelanalysis import game_menu_frame2
 from selenium import webdriver
-
-# variables
 global nums
 nums = 10000
-
-Filepath = ['./Dat1/' + f for f in listdir("./Dat1") if f.endswith('.csv')]
-premier = pd.concat(map(pd.read_csv, Filepath), ignore_index=True, sort=False)
-
-leagueData = pd.DataFrame(premier, columns=['HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'])
-
-
-MCIHome = leagueData.loc[leagueData['HomeTeam'] == 'Man City']
-MCIAway = leagueData.loc[leagueData['AwayTeam'] == 'Man City']
-MCIHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-MCIAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-MCIOMean = MCIHome["Offence"].mean() + MCIAway["Offence"].mean()
-MCIDMean = MCIHome["Defence"].mean() + MCIAway["Defence"].mean()
-MCIOGoals = MCIHome["Offence"].append(MCIAway["Offence"])
-MCIDGoals = MCIHome["Defence"].append(MCIAway["Defence"])
-
-MUNHome = leagueData.loc[leagueData['HomeTeam'] == 'Man United']
-MUNAway = leagueData.loc[leagueData['AwayTeam'] == 'Man United']
-MUNHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-MUNAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-MUNOMean = MUNHome["Offence"].mean() + MUNAway["Offence"].mean()
-MUNDMean = MUNHome["Defence"].mean() + MUNAway["Defence"].mean()
-MUNOGoals = MUNHome["Offence"].append(MUNAway["Offence"])
-MUNDGoals = MUNHome["Defence"].append(MUNAway["Defence"])
-
-LEIHome = leagueData.loc[leagueData['HomeTeam'] == 'Leicester']
-LEIAway = leagueData.loc[leagueData['AwayTeam'] == 'Leicester']
-LEIHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-LEIAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-LEIOMean = LEIHome["Offence"].mean() + LEIAway["Offence"].mean()
-LEIDMean = LEIHome["Defence"].mean() + LEIAway["Defence"].mean()
-LEIOGoals = LEIHome["Offence"].append(LEIAway["Offence"])
-LEIDGoals = LEIHome["Defence"].append(LEIAway["Defence"])
-
-CHEHome = leagueData.loc[leagueData['HomeTeam'] == 'Chelsea']
-CHEAway = leagueData.loc[leagueData['AwayTeam'] == 'Chelsea']
-CHEHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-CHEAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-CHEOMean = CHEHome["Offence"].mean() + CHEAway["Offence"].mean()
-CHEDMean = CHEHome["Defence"].mean() + CHEAway["Defence"].mean()
-CHEOGoals = CHEHome["Offence"].append(CHEAway["Offence"])
-CHEDGoals = CHEHome["Defence"].append(CHEAway["Defence"])
-
-WHUHome = leagueData.loc[leagueData['HomeTeam'] == 'West Ham']
-WHUAway = leagueData.loc[leagueData['AwayTeam'] == 'West Ham']
-WHUHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-WHUAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-WHUOMean = WHUHome["Offence"].mean() + WHUAway["Offence"].mean()
-WHUDMean = WHUHome["Defence"].mean() + WHUAway["Defence"].mean()
-WHUOGoals = WHUHome["Offence"].append(WHUAway["Offence"])
-WHUDGoals = WHUHome["Defence"].append(WHUAway["Defence"])
-
-TOTHome = leagueData.loc[leagueData['HomeTeam'] == 'Tottenham']
-TOTAway = leagueData.loc[leagueData['AwayTeam'] == 'Tottenham']
-TOTHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-TOTAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-TOTOMean = TOTHome["Offence"].mean() + TOTAway["Offence"].mean()
-TOTDMean = TOTHome["Defence"].mean() + TOTAway["Defence"].mean()
-TOTOGoals = TOTHome["Offence"].append(TOTAway["Offence"])
-TOTDGoals = TOTHome["Defence"].append(TOTAway["Defence"])
-
-LIVHome = leagueData.loc[leagueData['HomeTeam'] == 'Liverpool']
-LIVAway = leagueData.loc[leagueData['AwayTeam'] == 'Liverpool']
-LIVHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-LIVAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-LIVOMean = LIVHome["Offence"].mean() + LIVAway["Offence"].mean()
-LIVDMean = LIVHome["Defence"].mean() + LIVAway["Defence"].mean()
-LIVOGoals = LIVHome["Offence"].append(LIVAway["Offence"])
-LIVDGoals = LIVHome["Defence"].append(LIVAway["Defence"])
-
-EVEHome = leagueData.loc[leagueData['HomeTeam'] == 'Everton']
-EVEAway = leagueData.loc[leagueData['AwayTeam'] == 'Everton']
-EVEHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-EVEAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-EVEOMean = EVEHome["Offence"].mean() + EVEAway["Offence"].mean()
-EVEDMean = EVEHome["Defence"].mean() + EVEAway["Defence"].mean()
-EVEOGoals = EVEHome["Offence"].append(EVEAway["Offence"])
-EVEDGoals = EVEHome["Defence"].append(EVEAway["Defence"])
-
-ARSHome = leagueData.loc[leagueData['HomeTeam'] == 'Arsenal']
-ARSAway = leagueData.loc[leagueData['AwayTeam'] == 'Arsenal']
-ARSHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-ARSAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-ARSOMean = ARSHome["Offence"].mean() + ARSAway["Offence"].mean()
-ARSDMean = ARSHome["Defence"].mean() + ARSAway["Defence"].mean()
-ARSOGoals = ARSHome["Offence"].append(ARSAway["Offence"])
-ARSDGoals = ARSHome["Defence"].append(ARSAway["Defence"])
-
-AVLHome = leagueData.loc[leagueData['HomeTeam'] == 'Aston Villa']
-AVLAway = leagueData.loc[leagueData['AwayTeam'] == 'Aston Villa']
-AVLHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-AVLAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-AVLOMean = AVLHome["Offence"].mean() + AVLAway["Offence"].mean()
-AVLDMean = AVLHome["Defence"].mean() + AVLAway["Defence"].mean()
-AVLOGoals = AVLHome["Offence"].append(AVLAway["Offence"])
-AVLDGoals = AVLHome["Defence"].append(AVLAway["Defence"])
-
-LEEHome = leagueData.loc[leagueData['HomeTeam'] == 'Leeds']
-LEEAway = leagueData.loc[leagueData['AwayTeam'] == 'Leeds']
-LEEHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-LEEAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-LEEOMean = LEEHome["Offence"].mean() + LEEAway["Offence"].mean()
-LEEDMean = LEEHome["Defence"].mean() + LEEAway["Defence"].mean()
-LEEOGoals = LEEHome["Offence"].append(LEEAway["Offence"])
-LEEDGoals = LEEHome["Defence"].append(LEEAway["Defence"])
-
-CRYHome = leagueData.loc[leagueData['HomeTeam'] == 'Crystal Palace']
-CRYAway = leagueData.loc[leagueData['AwayTeam'] == 'Crystal Palace']
-CRYHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-CRYAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-CRYOMean = CRYHome["Offence"].mean() + CRYAway["Offence"].mean()
-CRYDMean = CRYHome["Defence"].mean() + CRYAway["Defence"].mean()
-CRYOGoals = CRYHome["Offence"].append(CRYAway["Offence"])
-CRYDGoals = CRYHome["Defence"].append(CRYAway["Defence"])
-
-WOLHome = leagueData.loc[leagueData['HomeTeam'] == 'Wolves']
-WOLAway = leagueData.loc[leagueData['AwayTeam'] == 'Wolves']
-WOLHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-WOLAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-WOLOMean = WOLHome["Offence"].mean() + WOLAway["Offence"].mean()
-WOLDMean = WOLHome["Defence"].mean() + WOLAway["Defence"].mean()
-WOLOGoals = WOLHome["Offence"].append(WOLAway["Offence"])
-WOLDGoals = WOLHome["Defence"].append(WOLAway["Defence"])
-
-SOUHome = leagueData.loc[leagueData['HomeTeam'] == 'Southampton']
-SOUAway = leagueData.loc[leagueData['AwayTeam'] == 'Southampton']
-SOUHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-SOUAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-SOUOMean = SOUHome["Offence"].mean() + SOUAway["Offence"].mean()
-SOUDMean = SOUHome["Defence"].mean() + SOUAway["Defence"].mean()
-SOUOGoals = SOUHome["Offence"].append(SOUAway["Offence"])
-SOUDGoals = SOUHome["Defence"].append(SOUAway["Defence"])
-
-BURHome = leagueData.loc[leagueData['HomeTeam'] == 'Burnley']
-BURAway = leagueData.loc[leagueData['AwayTeam'] == 'Burnley']
-BURHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-BURAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-BUROMean = BURHome["Offence"].mean() + BURAway["Offence"].mean()
-BURDMean = BURHome["Defence"].mean() + BURAway["Defence"].mean()
-BUROGoals = BURHome["Offence"].append(BURAway["Offence"])
-BURDGoals = BURHome["Defence"].append(BURAway["Defence"])
-
-BRIHome = leagueData.loc[leagueData['HomeTeam'] == 'Brighton']
-BRIAway = leagueData.loc[leagueData['AwayTeam'] == 'Brighton']
-BRIHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-BRIAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-BRIOMean = BRIHome["Offence"].mean() + BRIAway["Offence"].mean()
-BRIDMean = BRIHome["Defence"].mean() + BRIAway["Defence"].mean()
-BRIOGoals = BRIHome["Offence"].append(BRIAway["Offence"])
-BRIDGoals = BRIHome["Defence"].append(BRIAway["Defence"])
-
-NEWHome = leagueData.loc[leagueData['HomeTeam'] == 'Newcastle']
-NEWAway = leagueData.loc[leagueData['AwayTeam'] == 'Newcastle']
-NEWHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-NEWAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-NEWOMean = NEWHome["Offence"].mean() + NEWAway["Offence"].mean()
-NEWDMean = NEWHome["Defence"].mean() + NEWAway["Defence"].mean()
-NEWOGoals = NEWHome["Offence"].append(NEWAway["Offence"])
-NEWDGoals = NEWHome["Defence"].append(NEWAway["Defence"])
-
-FULHome = leagueData.loc[leagueData['HomeTeam'] == 'Fulham']
-FULAway = leagueData.loc[leagueData['AwayTeam'] == 'Fulham']
-FULHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-FULAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-FULOMean = FULHome["Offence"].mean() + FULAway["Offence"].mean()
-FULDMean = FULHome["Defence"].mean() + FULAway["Defence"].mean()
-FULOGoals = FULHome["Offence"].append(FULAway["Offence"])
-FULDGoals = FULHome["Defence"].append(FULAway["Defence"])
-
-WBAHome = leagueData.loc[leagueData['HomeTeam'] == 'West Brom']
-WBAAway = leagueData.loc[leagueData['AwayTeam'] == 'West Brom']
-WBAHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-WBAAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-WBAOMean = WBAHome["Offence"].mean() + WBAAway["Offence"].mean()
-WBADMean = WBAHome["Defence"].mean() + WBAAway["Defence"].mean()
-WBAOGoals = WBAHome["Offence"].append(WBAAway["Offence"])
-WBADGoals = WBAHome["Defence"].append(WBAAway["Defence"])
-
-SHUHome = leagueData.loc[leagueData['HomeTeam'] == 'Sheffield United']
-SHUAway = leagueData.loc[leagueData['AwayTeam'] == 'Sheffield United']
-SHUHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-SHUAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-SHUOMean = SHUHome["Offence"].mean() + SHUAway["Offence"].mean()
-SHUDMean = SHUHome["Defence"].mean() + SHUAway["Defence"].mean()
-SHUOGoals = SHUHome["Offence"].append(SHUAway["Offence"])
-SHUDGoals = SHUHome["Defence"].append(SHUAway["Defence"])
-
-
-AVGHome = leagueData.loc[leagueData['FTHG']]
-AVGAway = leagueData.loc[leagueData['FTAG']]
-AVGHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)
-AVGAway.rename(columns={'FTHG': 'Defence', 'FTAG': 'Offence'}, inplace=True)
-AVGOMean = AVGHome["Offence"].mean() + AVGAway["Offence"].mean()
-AVGDMean = AVGHome["Defence"].mean() + AVGHome["Defence"].mean()
-AVGOMean = float(AVGOMean)
-AVGHGoals = AVGHome["Offence"]
-AVGAGoals = AVGAway["Offence"]
+from aaa.OffDefStrength import NEWOGoals, NEWDGoals, WHUDGoals, WHUOGoals, WOLOGoals, WOLDGoals, SHUOGoals, SHUDGoals, \
+    FULOGoals, FULDGoals, ARSOGoals, ARSDGoals, MUNOGoals, MUNDGoals, BUROGoals, BURDGoals, LEEOGoals, LEEDGoals, \
+    LIVOGoals, LIVDGoals, CHEOGoals, CHEDGoals, BRIOGoals, BRIDGoals, TOTOGoals, TOTDGoals, SOUOGoals, SOUDGoals, \
+    AVLOGoals, AVLDGoals, MCIOGoals, MCIDGoals, CRYOGoals, CRYDGoals, LEIOGoals, LEIDGoals, WBAOGoals, WBADGoals, \
+    EVEOGoals, EVEDGoals
 
 
 # GW 30
@@ -405,7 +209,7 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
     option.binary_location = brave_path
     browser = webdriver.Chrome(executable_path=driver_path, options=option)
     browser.get("file:///C:/Users/ellio/Downloads/gw 30 eg tipico.html")
-    #https://sports.tipico.de/de/alle/1101/1201,32201,30201/1301,36301,42301
+    # https://sports.tipico.de/de/alle/1101/1201,32201,30201/1301,36301,42301
 
     col_names = ['Tipp 1', 'Tipp X', 'Tipp 2']
     lst_odds_tipp1 = []
@@ -464,11 +268,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
                                                                                                       y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=50, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=50, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=50, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Draw").place(x=50, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=50, y=200)
@@ -518,11 +322,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
             x=30, y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a draw").place(x=30, y=200)
 
         else:
@@ -573,11 +377,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
                                                                                                       y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Draw").place(x=30, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=30, y=200)
@@ -627,11 +431,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
             x=30, y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a draw").place(x=30, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=30, y=200)
@@ -683,11 +487,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
                                                                                                       y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a draw").place(x=30, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=30, y=200)
@@ -736,11 +540,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
         Label(game_menu_frame2, text="Away win: " + str(float("{0:.2f}".format(AwayFinalNew)))).place(x=30, y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a draw").place(x=30, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=30, y=200)
@@ -789,11 +593,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
         Label(game_menu_frame2, text="Away win: " + str(float("{0:.2f}".format(AwayFinalNew)))).place(x=30, y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a draw").place(x=30, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=30, y=200)
@@ -842,11 +646,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
         Label(game_menu_frame2, text="Away win: " + str(float("{0:.2f}".format(AwayFinalNew)))).place(x=30, y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a draw").place(x=30, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=30, y=200)
@@ -895,11 +699,11 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
         Label(game_menu_frame2, text="Away win: " + str(float("{0:.2f}".format(AwayFinalNew)))).place(x=30, y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=30, y=175)
 
-        if Team1WinPercent > HomeFinalNew + 10:
+        if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=30, y=200)
-        elif Team2WinPercent > AwayFinalNew + 10:
+        elif Team2WinPercent > AwayFinalNew + 8:
             Label(game_menu_frame2, text="Bet on an Away win").place(x=30, y=200)
-        elif DrawPercent > DrawFinalNew + 10:
+        elif DrawPercent > DrawFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a draw").place(x=30, y=200)
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=30, y=200)
@@ -934,9 +738,8 @@ def Betway(game_menu2, game_menu_frame2, q, row, row2):
     option.binary_location = brave_path
     browser = webdriver.Chrome(executable_path=driver_path, options=option)
     browser.get("file:///C:/Users/ellio/Downloads/gw 30 eg betway.html")
-    #https://betway.com/en/sports/grp/soccer/england/premier-league
+    # https://betway.com/en/sports/grp/soccer/england/premier-league
     # lost saved webpage
-
 
     col_names = ['Home', 'Draw', 'Away']
 
@@ -985,15 +788,13 @@ def Betway(game_menu2, game_menu_frame2, q, row, row2):
     Label(game_menu_frame2, text="Away win: " + str(float("{0:.2f}".format(AwayFinalNew)))).place(x=450, y=150)
     Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=450, y=175)
 
-    if Team1WinPercent > HomeFinalNew + 10:
+    if Team1WinPercent > HomeFinalNew + 8:
         Label(game_menu_frame2, text="Bet on an Home win").place(x=450, y=200)
-    elif Team2WinPercent > AwayFinalNew + 10:
+    elif Team2WinPercent > AwayFinalNew + 8:
         Label(game_menu_frame2, text="Bet on an Away win").place(x=450, y=200)
-    elif DrawPercent > DrawFinalNew + 10:
+    elif DrawPercent > DrawFinalNew + 8:
         Label(game_menu_frame2, text="Bet on a Draw").place(x=450, y=200)
     else:
         Label(game_menu_frame2, text="Ignore this bet").place(x=450, y=200)
     ModelOutput(game_menu2, game_menu_frame2)
     game_menu2.mainloop()
-
-
