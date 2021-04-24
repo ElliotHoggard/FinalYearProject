@@ -1,5 +1,6 @@
 from functools import partial
 from tkinter import *
+from tkhtmlview import HTMLLabel
 
 # Title
 global root
@@ -7,6 +8,7 @@ root = Tk()
 root.title('Premier League Prediction System')
 root.geometry("1200x800")
 root.configure(bg="#4c8a27")
+
 
 # Button format
 def create_buttons(root, parent_frame, buttons_list, column_num=1):
@@ -49,7 +51,8 @@ def create_buttons(root, parent_frame, buttons_list, column_num=1):
                                   relwidth=0.4)
         elif column_num == 1:
             buttons.append(
-                Button(parent_frame, text=(buttons_list[i]["name"]), bg='#add8e6', fg='Black', font=('Autobus Bold bold', 20),
+                Button(parent_frame, text=(buttons_list[i]["name"]), bg='#add8e6', fg='Black',
+                       font=('Autobus Bold bold', 20),
                        relief=GROOVE,
                        command=partial(button_click, buttons_list, i)))
             buttons[-1].place(relx=0.05,
@@ -77,18 +80,21 @@ def create_buttons1(root, parent_frame, buttons_list, column_num=1):
             if i - 1 % 2 == 0:
                 left_i += 0.2
                 buttons.append(
-                    Button(parent_frame, text=(buttons_list[i]["name"]), fg="White", bg="Red", font=('Autobus Bold', 12),
+                    Button(parent_frame, text=(buttons_list[i]["name"]), fg="White", bg="Red",
+                           font=('Autobus Bold', 12),
                            relief=GROOVE, command=partial(button_click, buttons_list, i)))
                 buttons[-1].place(relx=0.25, rely=0.10 + (0.005 + 0.1), relheight=0.075, relwidth=0.5)
             else:
                 right_i += 1
                 buttons.append(
-                    Button(parent_frame, text=(buttons_list[i]["name"]), fg="White", bg="Red", font=('Autobus Bold', 12),
+                    Button(parent_frame, text=(buttons_list[i]["name"]), fg="White", bg="Red",
+                           font=('Autobus Bold', 12),
                            relief=GROOVE, command=partial(button_click, buttons_list, i)))
                 buttons[-1].place(relx=0.25, rely=0.10 + (0.005 + 0.1) * (left_i - 0.2), relheight=0.075, relwidth=0.5)
         elif column_num == 1:
-            buttons.append(Button(parent_frame, text=(buttons_list[i]["name"]), fg="White", bg="Red", font=('Autobus Bold', 12),
-                                  relief=GROOVE, command=partial(button_click, buttons_list, i)))
+            buttons.append(
+                Button(parent_frame, text=(buttons_list[i]["name"]), fg="White", bg="Red", font=('Autobus Bold', 12),
+                       relief=GROOVE, command=partial(button_click, buttons_list, i)))
             buttons[-1].place(relx=0.25, rely=0.10 + (0.005 + 0.1) * (i - 0.2), relheight=0.075, relwidth=0.5)
 
 
@@ -99,11 +105,7 @@ def create_back_button(parent_frame):
     main_frame.place()
 
 
-def close():
-    root.destroy()
-
 # Button functions search
-
 def runSearch():
     Button(root, text="Exit", command=Main)
     root.title('Select Model')
@@ -113,10 +115,27 @@ def runSearch():
     root_frame = Frame(root, bg='#4c8a27')
     root_frame.place(relx=0.5, rely=0.0, relheight=1, relwidth=1, anchor='n')
     Label(root_frame, text="Model 2", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20, width=599)
-    from aaa.model2 import ResultSearchstart
-    ResultSearchstart(root_frame)
-
+    from aaa.model2 import ResultSearchStart
+    ResultSearchStart(root_frame)
     create_back_button(root)
+
+
+def Results():
+    Button(root, text="Exit", command=Main)
+    root.title('Select Model')
+    root.geometry("1200x800")
+    upper_frame = Frame(root, bg='#4c8a27', bd=5, )
+    upper_frame.place(relx=0.5, rely=0.1, relheight=0.2, relwidth=0.8, anchor="n")
+    root_frame = Frame(root, bg='#4c8a27')
+    create_back_button(root_frame)
+    root_frame.place(relx=0.5, rely=0.0, relheight=1, relwidth=1, anchor='n')
+    Label(root_frame, text="View Results", font="AutobusBold 15 bold").place(x=300, y=20, width=599)
+    html_label = HTMLLabel(root, state="normal", fg='black', font="AutobusBold 30 bold",
+                           html='<a href="https://docs.google.com/spreadsheets/d/12CnbJg6bi1WCTQIBHp36YcwLEH2ACWRJ5obK-yzIfHw/edit?usp=sharing"> Results </a>').place(
+        x=300, y=50, width=599)
+    html_label.pack()
+    create_back_button(root)
+    root.mainloop()
 
 
 # Game Week 30
@@ -166,7 +185,6 @@ def runEveCry1():
 
 
 # Gameweek 31
-
 def runMciLee1():
     from aaa.model1GW31 import MciLee1
     MciLee1()
@@ -211,12 +229,8 @@ def runBriEve1():
     from aaa.model1GW31 import BriEve1
     BriEve1()
 
+
 # GW 32
-def runEveTot1():
-    from aaa.model1GW32 import EveTot1
-    EveTot1()
-
-
 def runNewWhu1():
     from aaa.model1GW32 import NewWhu1
     NewWhu1()
@@ -256,6 +270,43 @@ def runAvlMci1():
     from aaa.model1GW32 import AvlMci1
     AvlMci1()
 
+
+# GW 33
+def runLivNew1():
+    from aaa.model1GW33 import LivNew1
+    LivNew1()
+
+
+def runWhuChe1():
+    from aaa.model1GW33 import WhuChe1
+    WhuChe1()
+
+
+def runShuBri1():
+    from aaa.model1GW33 import ShuBri1
+    ShuBri1()
+
+
+def runWolBur1():
+    from aaa.model1GW33 import WolBur1
+    WolBur1()
+
+
+def runLeeMun1():
+    from aaa.model1GW33 import LeeMun1
+    LeeMun1()
+
+
+def runAvlWba1():
+    from aaa.model1GW33 import AvlWba1
+    AvlWba1()
+
+
+def runLeiCry1():
+    from aaa.model1GW33 import LeiCry1
+    LeiCry1()
+
+
 # Model testing
 
 def runLogistic():
@@ -282,10 +333,12 @@ def runRandForest():
     from aaa.modelanalysis import randfor
     randfor()
 
+
 def runFeatureRating():
     from aaa.modelanalysis import featurerating
     featurerating()
     featurerating()
+
 
 # Graphs
 def runGraph1p1():
@@ -301,7 +354,6 @@ def runGraph2p1():
 def runGraph3p1():
     from aaa.Graphs import graph3p1
     graph3p1()
-
 
 
 def runGraph1p2():
@@ -360,7 +412,8 @@ def HomeAdvantage():
     upper_frame.place(relx=0.5, rely=0.1, relheight=0.2, relwidth=0.8, anchor="n")
     root_frame = Frame(root, bg='#4c8a27')
     root_frame.place(relx=0.5, rely=0.0, relheight=1, relwidth=1, anchor='n')
-    Label(root_frame, text="Measuring Home Advantage", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20, width=599)
+    Label(root_frame, text="Measuring Home Advantage", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20,
+                                                                                                       width=599)
     buttons = [{"name": "Bar Graph Across Multiple Seasons", "func_name": "runGraph1p1"},
                {"name": "Bar Graph Using Aggregate data", "func_name": "runGraph2p1"},
                {"name": "Pie Chart", "func_name": "runGraph3p1"}]
@@ -393,7 +446,8 @@ def StatAnalysis():
     upper_frame.place(relx=0.5, rely=0.1, relheight=0.2, relwidth=0.8, anchor="n")
     root_frame = Frame(root, bg='#4c8a27')
     root_frame.place(relx=0.5, rely=0.0, relheight=1, relwidth=1, anchor='n')
-    Label(root_frame, text="Statistical Analysis", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20, width=599)
+    Label(root_frame, text="Statistical Analysis", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20,
+                                                                                                   width=599)
     buttons = [{"name": "Home Form", "func_name": "runGraph1p4"},
                {"name": "Away Form", "func_name": "runGraph2p4"}]
     create_buttons1(root, root_frame, buttons, 1)
@@ -432,7 +486,7 @@ def SelectGameweek():
     buttons = [{"name": "Gameweek 30", "func_name": "Gameweek30"},
                {"name": "Gameweek 31", "func_name": "Gameweek31"},
                {"name": "Gameweek 32", "func_name": "Gameweek32"},
-               {"name": "Gameweek 33", "func_name": "Gameweek30"}]
+               {"name": "Gameweek 33", "func_name": "Gameweek33"}]
 
     create_buttons1(root, root_frame, buttons, 1)
     create_back_button(root)
@@ -498,6 +552,7 @@ def Gameweek31():
     create_back_button(root)
     mainloop()
 
+
 def Gameweek32():
     Button(root, text="Exit", command=Main)
     root.title('Probable Scoreline')
@@ -526,6 +581,35 @@ def Gameweek32():
     create_back_button(root)
     mainloop()
 
+
+def Gameweek33():
+    Button(root, text="Exit", command=Main)
+    root.title('Probable Scoreline')
+    root.geometry("1200x800")
+    upper_frame = Frame(root, bg='#4c8a27')
+    upper_frame.place(relx=0.5, rely=0.1, relheight=0.2, relwidth=0.8, anchor="n")
+
+    lower_frame = Frame(root, bg='#4c8a27', bd=2, )
+    lower_frame.place(relx=0.5, rely=0.5, relheight=0.2, relwidth=0.8, anchor="n")
+
+    root_frame = Frame(root, bg='#4c8a27')
+    root_frame.place(relx=0.5, rely=0.0, relheight=0.8, relwidth=1, anchor='n')
+
+    Label(root_frame, text="GameWeek 33", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20, width=599)
+
+    buttons = [{"name": "Liverpool vs Newcastle", "func_name": "runLivNew1"},
+               {"name": "West Ham vs Chelsea", "func_name": "runWhuChe1"},
+               {"name": "Sheffield vs Brighton", "func_name": "runShuBri1"},
+               {"name": "Wolves vs Burnley", "func_name": "runWolBur1"},
+               {"name": "Leeds vs Man United", "func_name": "runLeeMun1"},
+               {"name": "Aston Villa vs West Brom", "func_name": "runAvlWba1"},
+               {"name": "Leicester vs Crystal Palace", "func_name": "runLeiCry1"}]
+
+    create_buttons1(root, root_frame, buttons, 1)
+    create_back_button(root)
+    mainloop()
+
+
 def ELOModel():
     Button(root, text="Exit", command=Main)
     root.title('Select Gameweek')
@@ -534,7 +618,8 @@ def ELOModel():
     upper_frame.place(relx=0.5, rely=0.1, relheight=0.2, relwidth=0.8, anchor="n")
     root_frame = Frame(root, bg='#4c8a27')
     root_frame.place(relx=0.5, rely=0.0, relheight=1, relwidth=1, anchor='n')
-    Label(root_frame, text="Uses ELO data to predict the winning team", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20, width=599)
+    Label(root_frame, text="Uses ELO data to predict the winning team", font="AutobusBold 15 bold", bg="#add8e6").place(
+        x=300, y=20, width=599)
     buttons = []
     create_buttons1(root, root_frame, buttons, 1)
     create_back_button(root)
@@ -559,11 +644,12 @@ def Main():
                {"name": "Model 1", "func_name": "SelectGameweek"},
                {"name": "Model 2", "func_name": "runSearch"},
                {"name": "ELO Model", "func_name": "ELOModel"},
-               {"name": "Quit", "func_name": "close"}]
+               {"name": "Results", "func_name": "Results"}]
 
     create_buttons(root, lower_frame, buttons, 2)
     Label(lower_frame,
-          text="Data Analysis\nCarries out pre-processing to conduct analysis on the initial dataset \nAnalysing Models\nUtilises ANN, SVC, Regression, XGB and Random Forest algorithms to predict the 2021 season using statistics\nModel 1\nPredicts fixtures using SIMEON DENIS Poisson regression, this is then analysed against bookmakers\nModel 2\nPredicts fixtures using Poisson regression using an enhanced dataset with additional features\nELO Model\nUses ELO data to determine the accuracy ELO data has on predicting results", bg="#32CD32", fg='black', font="Autobus 12 bold").place(x= 30, y=425, anchor="w")
+          text="Data Analysis\nCarries out pre-processing to conduct analysis on the initial dataset \nAnalysing Models\nUtilises ANN, SVC, Regression, XGB and Random Forest algorithms to predict the 2021 season using statistics\nModel 1\nPredicts fixtures using SIMEON DENIS Poisson regression, this is then analysed against bookmakers\nModel 2\nPredicts fixtures using Poisson regression using an enhanced dataset with additional features\nELO Model\nUses ELO data to determine the accuracy ELO data has on predicting results",
+          bg="#32CD32", fg='black', font="Autobus 12 bold").place(x=30, y=425, anchor="w")
 
     label = Label(lower_frame, bg='#32CD32',
                   text="Features used \nHomeTeam = Home Team \nAwayTeam = Away Team \nMW = Match week \nFTHG = Full Time Home Team Goals \nFTAG = Full Time Away Team Goals \nFTR = Full Time Result (H=Home Win, D=Draw, A=Away Win) \nHTHG = Half Time Home Team Goals \nHTAG = Half Time Away Team Goals \nHTR = Half Time Result (H=Home Win, D=Draw, A=Away Win)\n \nMatch Statistics \nHST = Home Team Shots on Target \nAST = Away Team Shots on Target \nHC = Home Team Corners \nAC = Away Team Corners \nHY = Home Team Yellow Cards \nAY = Away Team Yellow Cards \nHR = Home Team Red Cards \nAR = Away Team Red Cards \nB365H = Bet365 home win odds \nB365D = Bet365 draw odds \nB365A = Bet365 away win odds \nELO Home = ELO home rating \nELO Away = ELO away rating \nHM1Conv = Previous game result converted to int \nHomeTeamLP = Home team league position \nAwayTeamLP = Away team league position")
@@ -578,7 +664,8 @@ def Main():
 
     lower_frame2 = Frame(root, bg='#4c8a27', bd=5)
     lower_frame2.place(relx=0.5, rely=0.76, relheight=0.1, relwidth=0.8, anchor='n')
-    Button(lower_frame2, text="Features Used", state="normal", fg='black',bg = "#add8e6", anchor=CENTER, command=labelactive).pack(side=BOTTOM)
+    Button(lower_frame2, text="Features Used", state="normal", fg='black', bg="#add8e6", anchor=CENTER,
+           command=labelactive).pack(side=BOTTOM)
     Button(lower_frame2, text="Hide Feature section", state="normal", fg='black', bg="#add8e6", anchor=CENTER,
            command=labeldeactive).pack(side=BOTTOM)
     root.mainloop()
