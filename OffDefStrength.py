@@ -1,10 +1,13 @@
 from os import listdir
 import pandas as pd
 
+# Reads all Dat1 contents
 Filepath = ['./Dat1/' + f for f in listdir("./Dat1") if f.endswith('.csv')]
 premier = pd.concat(map(pd.read_csv, Filepath), ignore_index=True, sort=False)
 leagueData = pd.DataFrame(premier, columns=['HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'])
 
+# Finds the goals scored and goals conceded from the dataset
+# Values used in model 1 to complete regression
 MCIHome = leagueData.loc[leagueData['HomeTeam'] == 'Man City']
 MCIAway = leagueData.loc[leagueData['AwayTeam'] == 'Man City']
 MCIHome.rename(columns={'FTHG': 'Offence', 'FTAG': 'Defence'}, inplace=True)

@@ -13,8 +13,6 @@ from aaa.OffDefStrength import NEWOGoals, NEWDGoals, WHUDGoals, WHUOGoals, WOLOG
     SOUOGoals, SOUDGoals, AVLOGoals, AVLDGoals, MCIOGoals, MCIDGoals, CRYOGoals, CRYDGoals, LEIOGoals, LEIDGoals, \
     WBAOGoals, WBADGoals
 
-
-# GW 33
 def LivNew1():
     LIVBalancedMean = np.mean([LIVOGoals.mean(), NEWDGoals.mean()])
     NEWBalancedMean = np.mean([NEWOGoals.mean(), LIVDGoals.mean()])

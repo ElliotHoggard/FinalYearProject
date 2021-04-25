@@ -13,8 +13,6 @@ from aaa.OffDefStrength import NEWOGoals, NEWDGoals, WHUDGoals, WHUOGoals, WOLOG
     SOUOGoals, SOUDGoals, AVLOGoals, AVLDGoals, MCIOGoals, MCIDGoals, CRYOGoals, CRYDGoals, LEIOGoals, LEIDGoals, \
     WBAOGoals, WBADGoals
 
-
-# GW 32
 def NewWhu1():
     NEWBalancedMean = np.mean([NEWOGoals.mean(), WHUDGoals.mean()])
     WHUBalancedMean = np.mean([WHUOGoals.mean(), NEWDGoals.mean()])
@@ -189,7 +187,7 @@ def TipicoFirstGame(game_menu_frame2, q):
     option = webdriver.ChromeOptions()
     option.binary_location = brave_path
     browser = webdriver.Chrome(executable_path=driver_path, options=option)
-    browser.get("file:///C:/Users/ellio/Downloads/Tipico32.html")
+    browser.get("file:///C:/Users/ellio/OneDrive/Documents/AA Project/aaa/TipicoWebsite/Tipico32.html")
 
     col_names = ['Tipp 1', 'Tipp X', 'Tipp 2']
     lst_odds_tipp1 = []

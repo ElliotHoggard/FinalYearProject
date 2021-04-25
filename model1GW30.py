@@ -5,8 +5,10 @@ import numpy.random as nr
 import pandas as pd
 from aaa.modelanalysis import game_menu_frame2
 from selenium import webdriver
+# Number of times Poisson is used to predict a fixture
 global nums
 nums = 10000
+# All team offense and defence values
 from aaa.OffDefStrength import NEWOGoals, NEWDGoals, WHUDGoals, WHUOGoals, WOLOGoals, WOLDGoals, SHUOGoals, SHUDGoals, \
     FULOGoals, FULDGoals, ARSOGoals, ARSDGoals, MUNOGoals, MUNDGoals, BUROGoals, BURDGoals, LEEOGoals, LEEDGoals, \
     LIVOGoals, LIVDGoals, CHEOGoals, CHEDGoals, BRIOGoals, BRIDGoals, TOTOGoals, TOTDGoals, SOUOGoals, SOUDGoals, \
@@ -14,17 +16,18 @@ from aaa.OffDefStrength import NEWOGoals, NEWDGoals, WHUDGoals, WHUOGoals, WOLOG
     EVEOGoals, EVEDGoals
 
 
-# GW 30
+# All fixtures for Game Week 30
 def CheWba1():
     CHEBalancedMean1 = np.mean([CHEOGoals.mean(), WBADGoals.mean()])
     WBABalancedMean1 = np.mean([WBAOGoals.mean(), CHEDGoals.mean()])
-    q = 1
+    q = 1  # unique values as each fixture has a unique X-path
     sim_poissonCHEWBA(nums, CHEBalancedMean1.mean(), WBABalancedMean1.mean())
     distA, distB = sim_poissonCHEWBA(10000)
     winPercent(distA, distB, q)
 
 
 def sim_poissonCHEWBA(nums, mean1=CHEOGoals.mean() + WBADGoals.mean(), mean2=WBAOGoals.mean() + CHEDGoals.mean()):
+    # Completes Poisson for a fixture
     n = 1
     while n < nums:
         dist1 = nr.poisson(lam=mean1, size=n)
@@ -33,6 +36,7 @@ def sim_poissonCHEWBA(nums, mean1=CHEOGoals.mean() + WBADGoals.mean(), mean2=WBA
     return (dist1, dist2)
 
 
+# Poisson calculated for all fixtures for the Game Week
 def LeeShu1():
     LEEBalancedMean = np.mean([LEEOGoals.mean(), SHUDGoals.mean()])
     SHUBalancedMean = np.mean([SHUOGoals.mean(), LEEDGoals.mean()])
@@ -177,7 +181,7 @@ def sim_poissonEVECRY(nums, mean1=EVEOGoals.mean() + CRYDGoals.mean(), mean2=CRY
     return (dist1, dist2)
 
 
-# Calculates the win percentage
+# Calculates the win percentage using the poisson values to create the probabilities
 def winPercent(distA, distB, q):
     WinTeam1 = 0
     WinTeam2 = 0
@@ -202,13 +206,14 @@ def winPercent(distA, distB, q):
     TipicoFirstGame(game_menu2, game_menu_frame2, q)
 
 
+# Bookmakers odds are compared to the model produced using the correlating odds X path
 def TipicoFirstGame(game_menu2, game_menu_frame2, q):
     driver_path = r"C:\Users\ellio\Downloads\chromedriver.exe"
     brave_path = r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
     option = webdriver.ChromeOptions()
     option.binary_location = brave_path
     browser = webdriver.Chrome(executable_path=driver_path, options=option)
-    browser.get("file:///C:/Users/ellio/Downloads/gw 30 eg tipico.html")
+    browser.get("file:///C:/Users/ellio/OneDrive/Documents/AA Project/aaa/TipicoWebsite/gw 30 eg tipico.html")
     # https://sports.tipico.de/de/alle/1101/1201,32201,30201/1301,36301,42301
 
     col_names = ['Tipp 1', 'Tipp X', 'Tipp 2']
@@ -232,6 +237,7 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
                       columns=col_names)
     df.style.hide_index()
 
+    # Depending on the fixture, a different X path is needed to be inputted
     if q == 1:
         row = 1
         row2 = 1
@@ -268,6 +274,7 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
                                                                                                       y=150)
         Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=50, y=175)
 
+        # If my model has a value higher than the bookmakers plus 8% then it recommends betting
         if Team1WinPercent > HomeFinalNew + 8:
             Label(game_menu_frame2, text="Bet on a Home win").place(x=50, y=200)
         elif Team2WinPercent > AwayFinalNew + 8:
@@ -277,6 +284,7 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
         else:
             Label(game_menu_frame2, text="Ignore this bet").place(x=50, y=200)
 
+        # Predicts a scoreline by comparing finding the mean of each teams offense and defence strength
         CHEBalancedMean1 = np.mean([CHEOGoals.mean(), WBADGoals.mean()])
         WBABalancedMean1 = np.mean([WBAOGoals.mean(), CHEDGoals.mean()])
         roundedChe = round(CHEBalancedMean1)
@@ -286,6 +294,7 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
             x=30, y=50)
         Betway(game_menu2, game_menu_frame2, q, row, row2)
 
+    # Repeats for all fixtures using the different X-Path values set
     if q == 2:
         row = 1
         row2 = 2
@@ -721,6 +730,7 @@ def TipicoFirstGame(game_menu2, game_menu_frame2, q):
         ModelOutput(game_menu2, game_menu_frame2)
 
 
+# Outputs model 1 values
 def ModelOutput(game_menu2, game_menu_frame2):
     Label(game_menu_frame2, text="Our Probability").place(x=250, y=100)
     Label(game_menu_frame2, text="Home win: " + str(float("{0:.2f}".format(Team1WinPercent))) + "%").place(x=250, y=125)
@@ -730,6 +740,7 @@ def ModelOutput(game_menu2, game_menu_frame2):
     game_menu2.mainloop()
 
 
+# Calculates Betway odds using the X-path values inputted into the function
 def Betway(game_menu2, game_menu_frame2, q, row, row2):
     driver_path = r"C:\Users\ellio\Downloads\chromedriver.exe"
     brave_path = r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
@@ -737,9 +748,9 @@ def Betway(game_menu2, game_menu_frame2, q, row, row2):
     option = webdriver.ChromeOptions()
     option.binary_location = brave_path
     browser = webdriver.Chrome(executable_path=driver_path, options=option)
-    browser.get("file:///C:/Users/ellio/Downloads/gw 30 eg betway.html")
+    browser.get("file:///C:/Users/ellio/OneDrive/Documents/AA Project/aaa/BetwayWebsite/gw 30 eg betway.html")
     # https://betway.com/en/sports/grp/soccer/england/premier-league
-    # lost saved webpage
+    # example for what previously happened using another set of fixtures as GW 30 was lost for Betway
 
     col_names = ['Home', 'Draw', 'Away']
 
@@ -788,6 +799,7 @@ def Betway(game_menu2, game_menu_frame2, q, row, row2):
     Label(game_menu_frame2, text="Away win: " + str(float("{0:.2f}".format(AwayFinalNew)))).place(x=450, y=150)
     Label(game_menu_frame2, text="Draw: " + str(float("{0:.2f}".format(DrawFinalNew)))).place(x=450, y=175)
 
+    # Calculates if a bet is worthwhile
     if Team1WinPercent > HomeFinalNew + 8:
         Label(game_menu_frame2, text="Bet on an Home win").place(x=450, y=200)
     elif Team2WinPercent > AwayFinalNew + 8:

@@ -13,8 +13,6 @@ from aaa.OffDefStrength import NEWOGoals, NEWDGoals, WHUDGoals, WHUOGoals, WOLOG
     SOUOGoals, SOUDGoals, AVLOGoals, AVLDGoals, MCIOGoals, MCIDGoals, CRYOGoals, CRYDGoals, LEIOGoals, LEIDGoals, \
     WBAOGoals, WBADGoals, EVEOGoals, EVEDGoals
 
-
-# GW 31
 def MciLee1():
     MCIBalancedMean = np.mean([MCIOGoals.mean(), LEEDGoals.mean()])
     LEEBalancedMean = np.mean([LEEOGoals.mean(), MCIDGoals.mean()])
@@ -208,7 +206,8 @@ def TipicoFirstGame(game_menu_frame2, q):
     option.binary_location = brave_path
     browser = webdriver.Chrome(executable_path=driver_path, options=option)
     browser.get(
-        "file:///C:/Users/ellio/Downloads/Premier League Wetten - englische Fussball Wetten mit top Quoten.html")
+        "file:///C:/Users/ellio/OneDrive/Documents/AA Project/aaa/TipicoWebsite/Premier League Wetten - englische "
+        "Fussball Wetten mit top Quoten.html")
 
     col_names = ['Tipp 1', 'Tipp X', 'Tipp 2']
     lst_odds_tipp1 = []
@@ -732,7 +731,7 @@ def Betway(game_menu_frame2, q, row, row2):
     option = webdriver.ChromeOptions()
     option.binary_location = brave_path
     browser = webdriver.Chrome(executable_path=driver_path, options=option)
-    browser.get("file:///C:/Users/ellio/Downloads/Premier League Betting & Odds _ Bet on the Premier League.html")
+    browser.get("file:///C:/Users/ellio/OneDrive/Documents/AA Project/aaa/BetwayWebsite/betway gw 31.html")
 
     col_names = ['Home', 'Draw', 'Away']
 

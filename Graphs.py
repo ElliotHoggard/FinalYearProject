@@ -5,7 +5,8 @@ from scipy.special import factorial
 from pandas.plotting import scatter_matrix
 import seaborn as sns
 
-
+# Part 1 - Measuring home advantage
+# Calculates the home, away and draws that occur
 def get_result_stats(playing_stats, year):
     return pd.DataFrame(data=[len(playing_stats[playing_stats.FTR == 'H']),
                               len(playing_stats[playing_stats.FTR == 'A']),
@@ -14,7 +15,7 @@ def get_result_stats(playing_stats, year):
                         columns=[year]
                         ).T
 
-
+# Produces a graph with the home wins, away wins and draws over multiple seasons for analysis
 def graph1p1():
     leagueData = ['HomeTeam', 'AwayTeam', 'FTHG', 'FTAG', 'FTR']
 
@@ -51,7 +52,7 @@ def graph1p1():
     ax.set_xlabel('Season', size=12)
     plt.show()
 
-
+# Produces a graph with the home wins, away wins and draws over multiple seasons
 def graph2p1():
     leagueData = ['HomeTeam', 'AwayTeam', 'FTHG', 'FTAG', 'FTR']
     dat = pd.read_csv('Dat1/Dat121.csv', error_bad_lines=False)
@@ -82,7 +83,7 @@ def graph2p1():
     ax1.set_xlabel('Season', size=12)
     plt.show()
 
-
+# Produces a pie chart with the home wins, away wins and draws over the last 5 seasons
 def graph3p1():
     leagueData = ['HomeTeam', 'AwayTeam', 'FTHG', 'FTAG', 'FTR']
     dat = pd.read_csv('Dat1/Dat121.csv', error_bad_lines=False)
@@ -124,7 +125,8 @@ def graph3p1():
     plt.show()
 
 
-
+# Part 2 - measuring feature strength for the last season
+# Man City
 def graph1p2():
     dat = pd.read_csv('Dat2/Dat2_1920.csv', error_bad_lines=False)
     data = dat.dropna()
@@ -132,6 +134,7 @@ def graph1p2():
     sns.pairplot(temp, hue='FTR', palette='coolwarm')
     plt.show()
 
+# Liverpool
 def graph2p2():
     dat = pd.read_csv('Dat2/Dat2_1920.csv', error_bad_lines=False)
     data = dat.dropna()
@@ -139,7 +142,7 @@ def graph2p2():
     sns.pairplot(temp, hue='FTR', palette='coolwarm')
     plt.show()
 
-
+# Part 3 - Calculating the average goals scored
 def graph1p3():
     k = []
     p_k = []
@@ -164,8 +167,9 @@ def poisson(k, exp_events):
     p_k = np.exp(-lam) * np.power(lam, k) / factorial(k)
     return p_k
 
+# Part 4 - Home/Away comparison
+# Home form
 def graph1p4():
-    #home form
     epl = pd.read_csv("Dat1/Dat121.csv", sep=',')
     results = epl.groupby('HomeTeam')['FTR'].value_counts().to_frame()
     results.columns = ['Count']
@@ -179,8 +183,8 @@ def graph1p4():
     ax.tick_params(labelsize=12)
     plt.show()
 
+# Away form
 def graph2p4():
-    #away form
     epl = pd.read_csv("Dat1/Dat121.csv", sep=',')
     results = epl.groupby('AwayTeam')['FTR'].value_counts().to_frame()
     results.columns = ['Count']
@@ -193,5 +197,3 @@ def graph2p4():
     ax.set_ylabel('Count', fontsize=12)
     ax.tick_params(labelsize=12)
     plt.show()
-
-
