@@ -17,6 +17,7 @@ To run the application head to the dist folder where an executable exe called 'B
 
 *Please note the exe file lacks certain functionalities due to compatibility issues, it is recommended to download all software requirements and run within a Python environment.*
 
+**Main Menu**
 ![menu](https://user-images.githubusercontent.com/43520641/117599176-35e32000-b141-11eb-87f5-36abcfa914ee.PNG)
 
 
