@@ -13,7 +13,7 @@ The following project uses machine learning to predict the results and scoreline
 
 **Installation instructions**
 
-To run the application head to the dist folder where an executable exe called 'Build.exe' is located, this can be downloaded and ran. 
+To run the application head to the dist folder where an executable exe called 'Build.exe' is located, this can be downloaded and ran without any software requirements. 
 
 *Please note the exe file lacks certain functionalities due to compatibility issues, it is recommended to download all software requirements and run within a Python environment.*
 
