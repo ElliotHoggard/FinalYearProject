@@ -36,14 +36,13 @@ def graph1p1():
     sc19 = scores1920[leagueData]
     sc20 = scores2021[leagueData]
 
-    result_stats_agg = get_result_stats(data_, 'Overall')
     result_stats_1 = get_result_stats(sc16, '2016-17')
     result_stats_2 = get_result_stats(sc17, '2017-18')
     result_stats_3 = get_result_stats(sc18, '2018-19')
     result_stats_4 = get_result_stats(sc19, '2019-20')
     result_stats_5 = get_result_stats(sc20, '2020-21')
     result_stats = pd.concat(
-        [result_stats_1, result_stats_2, result_stats_3, result_stats_4, result_stats_5, result_stats_agg])
+        [result_stats_1, result_stats_2, result_stats_3, result_stats_4, result_stats_5])
 
     ax = result_stats.plot(kind='bar', color=['steelblue', 'sandybrown', 'turquoise'], figsize=[16, 7.5],
                            title='Result Statistics for Different Years')
@@ -130,7 +129,7 @@ def graph3p1():
 def graph1p2():
     dat = pd.read_csv('Dat2/Dat2_1920.csv', error_bad_lines=False)
     data = dat.dropna()
-    temp = data[data['HomeTeam'] == 'Man City'][['FTHG', 'FTAG', 'HY', 'AY', 'FTR']]
+    temp = data[data['HomeTeam'] == 'West Ham'][['HST', 'AST', 'HY', 'AY', 'FTR']]
     sns.pairplot(temp, hue='FTR', palette='coolwarm')
     plt.show()
 

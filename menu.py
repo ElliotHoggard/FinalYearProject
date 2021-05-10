@@ -25,34 +25,21 @@ def create_buttons(root, parent_frame, buttons_list, column_num=1):
                 left_i += 1
                 buttons.append(
                     Button(parent_frame, text=(buttons_list[i]["name"]), bg='#add8e6', foreground='black', fg='Black',
-                           font=('Autobus Bold bold', 20),
-                           relief=GROOVE,
-                           command=partial(button_click, buttons_list, i)))
-                buttons[-1].place(relx=0.05,
-                                  rely=0.01 + (0.005 + b_height) * (left_i - 1),
-                                  relheight=0.15,
-                                  relwidth=0.4)
+                           font=('Autobus Bold bold', 20), relief=GROOVE,command=partial(button_click, buttons_list, i)))
+                buttons[-1].place(relx=0.05,rely=0.01 + (0.005 + b_height) * (left_i - 1),relheight=0.15,relwidth=0.4)
             else:
                 right_i += 1
                 buttons.append(
-                    Button(parent_frame, text=(buttons_list[i]["name"]), bg='#add8e6', fg='Black',
-                           font=('Autobus Bold bold', 20),
-                           relief=GROOVE,
-                           command=partial(button_click, buttons_list, i)))
-                buttons[-1].place(relx=0.5,
-                                  rely=0.01 + (0.005 + b_height) * (left_i - 1),
-                                  relheight=0.15,
-                                  relwidth=0.4)
+                    Button(parent_frame, text=(buttons_list[i]["name"]), bg='#add8e6', fg='Black',font=('Autobus Bold bold', 20),
+                           relief=GROOVE, command=partial(button_click, buttons_list, i)))
+                buttons[-1].place(relx=0.5,rely=0.01 + (0.005 + b_height) * (left_i - 1),relheight=0.15,relwidth=0.4)
         elif column_num == 1:
             buttons.append(
                 Button(parent_frame, text=(buttons_list[i]["name"]), bg='#add8e6', fg='Black',
                        font=('Autobus Bold bold', 20),
                        relief=GROOVE,
                        command=partial(button_click, buttons_list, i)))
-            buttons[-1].place(relx=0.05,
-                              rely=0.01 + (0.005 + b_height),
-                              relheight=0.15,
-                              relwidth=0.4)
+            buttons[-1].place(relx=0.05,rely=0.01 + (0.005 + b_height),relheight=0.15,relwidth=0.4)
 
 
 # Button format for submenu
@@ -115,7 +102,7 @@ def runSearch():
 # Display results from my two models
 def Results():
     Button(root, text="Exit", command=Main)
-    root.title('Select Model')
+    root.title('Results')
     root.geometry("1200x800")
     upper_frame = Frame(root, bg='#4c8a27', bd=5, )
     upper_frame.place(relx=0.5, rely=0.1, relheight=0.2, relwidth=0.8, anchor="n")
@@ -124,10 +111,10 @@ def Results():
     lower_frame.place(relx=0.5, rely=0.1, relheight=0.15, relwidth=1, anchor="n")
     create_back_button(root_frame)
     root_frame.place(relx=0.5, rely=0.0, relheight=1, relwidth=1, anchor='n')
-    Label(root_frame, text="View Results", bg='#add8e6', font="AutobusBold 15 bold").place(x=300, y=20, width=599)
-    HTMLLabel(lower_frame, state="normal", fg='black', font="AutobusBold 30 bold", bg='#4c8a27',
-              html='<a href="https://docs.google.com/spreadsheets/d'
-                   '/12CnbJg6bi1WCTQIBHp36YcwLEH2ACWRJ5obK-yzIfHw/edit?usp=sharing"> Click to view the '
+    Label(root_frame, text="Click on the link 'Click to view all results' to open up a Google sheets with all results", bg='#4c8a27', font="AutobusBold 12 bold").place(x=275, y=60)
+    Label(root_frame, text="Click to view all results", bg='#add8e6', font="AutobusBold 15 bold").place(x=300, y=20, width=599)
+    HTMLLabel(lower_frame, state="normal", fg='black', font="AutobusBold 30 bold", bg='#add8e6',
+              html='<a href="https://docs.google.com/spreadsheets/d/1cn8pl7UIQzIvn65ByVGZq8QswEd-FMTGybK50ab84pk/edit?usp=sharing"> Click to view the '
                    'Results </a>').place(
         x=300, y=50, width=599)
     create_back_button(root)
@@ -302,6 +289,41 @@ def runLeiCry1():
     from aaa.model1GW33 import LeiCry1
     LeiCry1()
 
+
+# Game Week 34 fixtures model 1
+def runCryMci1():
+    from aaa.model1GW34 import CryMci1
+    CryMci1()
+
+
+def runBriLee1():
+    from aaa.model1GW34 import BriLee1
+    BriLee1()
+
+
+def runCheFul1():
+    from aaa.model1GW34 import CheFul1
+    CheFul1()
+
+
+def runEveAvl1():
+    from aaa.model1GW34 import EveAvl1
+    EveAvl1()
+
+
+def runLeeMun1():
+    from aaa.model1GW34 import LeeMun1
+    LeeMun1()
+
+
+def runNewArs1():
+    from aaa.model1GW34 import NewArs1
+    NewArs1()
+
+
+def runMunLiv1():
+    from aaa.model1GW34 import MunLiv1
+    MunLiv1()
 
 # Model testing for model analysis
 
@@ -484,7 +506,8 @@ def SelectGameweek():
     buttons = [{"name": "Gameweek 30", "func_name": "Gameweek30"},
                {"name": "Gameweek 31", "func_name": "Gameweek31"},
                {"name": "Gameweek 32", "func_name": "Gameweek32"},
-               {"name": "Gameweek 33", "func_name": "Gameweek33"}]
+               {"name": "Gameweek 33", "func_name": "Gameweek33"},
+               {"name": "Gameweek 34", "func_name": "Gameweek34"}]
     create_buttons1(root, root_frame, buttons, 1)
     create_back_button(root)
     mainloop()
@@ -591,6 +614,28 @@ def Gameweek33():
     mainloop()
 
 
+def Gameweek34():
+    Button(root, text="Exit", command=Main)
+    root.title('Probable Scoreline')
+    root.geometry("1200x800")
+    upper_frame = Frame(root, bg='#4c8a27')
+    upper_frame.place(relx=0.5, rely=0.1, relheight=0.2, relwidth=0.8, anchor="n")
+    lower_frame = Frame(root, bg='#4c8a27', bd=2, )
+    lower_frame.place(relx=0.5, rely=0.5, relheight=0.2, relwidth=0.8, anchor="n")
+    root_frame = Frame(root, bg='#4c8a27')
+    root_frame.place(relx=0.5, rely=0.0, relheight=0.8, relwidth=1, anchor='n')
+    Label(root_frame, text="Game Week 34", font="AutobusBold 15 bold", bg="#add8e6").place(x=300, y=20, width=599)
+    buttons = [{"name": "Crystal Palace vs Man City", "func_name": "runCryMci1"},
+               {"name": "Brighton vs Leeds", "func_name": "runBriLee1"},
+               {"name": "Chelsea vs Fulham", "func_name": "runCheFul1"},
+               {"name": "Everton vs Aston Villa", "func_name": "runEveAvl1"},
+               {"name": "Newcastle vs Arsenal", "func_name": "runNewArs1"},
+               {"name": "Man United vs Liverpool", "func_name": "runMunLiv1"}]
+    create_buttons1(root, root_frame, buttons, 1)
+    create_back_button(root)
+    mainloop()
+
+
 # ELO model 3 model
 def ELOModel():
     Button(root, text="Exit", command=Main)
@@ -620,7 +665,7 @@ def Main():
     main_frame = LabelFrame(root, bg='#4c8a27', bd=5)
     main_frame.place()
     upper_frame = Frame(root, bg='#4c8a27', bd=5, )
-    upper_frame.place(relx=0.5, rely=0.01, relheight=0.2, relwidth=0.98, anchor="n")
+    upper_frame.place(relx=0.48, rely=0.01, relheight=0.2, relwidth=0.98, anchor="n")
     apps_label = Label(upper_frame, text='Premier League Prediction System', font=("AutobusBold 40 bold"), bg="#4c8a27")
     apps_label.place(relheight=0.5, relwidth=1)
     lower_frame = Frame(root, bg='#4c8a27', bd=5)

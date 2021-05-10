@@ -6,7 +6,7 @@ from tkinter import *
 import numpy as np
 import pandas as pd
 import tkinter as tk
-
+import matplotlib.pyplot as plt
 # Reads all Dat2 contents
 Filepath = ['./Dat2/' + f for f in listdir("./Dat2") if f.endswith('.csv')]
 premier = pd.concat(map(pd.read_csv, Filepath), ignore_index=True, sort=False)
