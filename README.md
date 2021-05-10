@@ -8,7 +8,7 @@ The following project uses machine learning to predict the results and scoreline
 **Software Requirements**
 
 - Python (version 3.9 is recommended)
-- Chromium browser project
+- Chromedriver
 - The Python libraries TKinker, Pandas, Numpy, MatPlotlib, Tensorflow, SciKit-Learn, XGBoost, SciPy and Selenium
 
 ![menu](https://user-images.githubusercontent.com/43520641/117599176-35e32000-b141-11eb-87f5-36abcfa914ee.PNG)
