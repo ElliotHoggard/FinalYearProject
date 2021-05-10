@@ -3,7 +3,6 @@ The following project uses machine learning to predict the results and scoreline
 
 **Software Requirements**
 
-The following software is required:
 - Python (version 3.9 is recommended)
 - Chromium browser project
 - The Python libraries TKinker, Pandas, Numpy, MatPlotlib, Tensorflow, SciKit-Learn, XGBoost, SciPy and Selenium
