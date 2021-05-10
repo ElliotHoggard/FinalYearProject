@@ -14,8 +14,7 @@ The following project uses machine learning to predict the results and scoreline
 **Installation instructions**
 
 To run the application head to the build folder where an executable exe called 'Build.exe' is located, this can be downloaded and ran. 
-* Please note *
-The exe file lacks some functionality as my program lacked comparability with PyInstaller, it is recommended to download all software requirements and run within a Python environment. *
+*Please note the exe file lacks some functionality as my program lacked comparability with PyInstaller, it is recommended to download all software requirements and run within a Python environment.*
 
 ![menu](https://user-images.githubusercontent.com/43520641/117599176-35e32000-b141-11eb-87f5-36abcfa914ee.PNG)
 
