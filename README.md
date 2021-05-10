@@ -1,5 +1,5 @@
 # FinalYearProject
-A machine learning project that predicts Premier League Results and scoreline using regression techniques, predictions are then analysed against bookmakers.
+*A machine learning project that predicts Premier League Results and scoreline predominantly using regression.*
 
 **Project Description**
 
