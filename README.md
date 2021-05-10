@@ -11,6 +11,9 @@ The following project uses machine learning to predict the results and scoreline
 - Chromedriver
 - The Python libraries TKinker, Pandas, Numpy, MatPlotlib, Tensorflow, SciKit-Learn, XGBoost, SciPy and Selenium
 
+**Software Requirements**
+To run the application simply head to the build folder where you will find the an executable exe file which can be downloaded and ran. *Please note this exe file lacks some functionality as certain libraries were unable to be used within PyInstaller *
+
 ![menu](https://user-images.githubusercontent.com/43520641/117599176-35e32000-b141-11eb-87f5-36abcfa914ee.PNG)
 
 
