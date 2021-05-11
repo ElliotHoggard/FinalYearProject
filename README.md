@@ -21,4 +21,4 @@ To run the application head to the dist folder where an executable exe called 'B
 ![menu](https://user-images.githubusercontent.com/43520641/117599176-35e32000-b141-11eb-87f5-36abcfa914ee.PNG)
 
 
-#### In the GUI's menu shown above you can see the project's general functionality through the description given for each button.
+#### In the GUI menu shown above you can see the project's general functionality.
