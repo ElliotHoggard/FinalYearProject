@@ -13,9 +13,14 @@ The following project uses machine learning to predict the results and scoreline
 - Chromedriver
 - The Python libraries TKinker, Pandas, Numpy, MatPlotlib, Tensorflow, SciKit-Learn, XGBoost, SciPy and Selenium
 
-**Installation instructions**
+**How to run the code**
 
-To run the application head to the dist folder where an executable exe called 'Build.exe' is located, this can be downloaded and ran without any software requirements. However, please note the exe file lacks certain functionalities due to compatibility issues, it is recommended to download all software requirements and run within a Python environment.*
+1. Download all required software requirements
+2. Clone this repository
+3. git clone https://github.com/ElliotHoggard/FinalYearProject.git
+4. Download the live betting data available from the Google Drive link (https://drive.google.com/drive/folders/17G4Ipybt4XJ_EiGkWkl6vafQR2Nk7qH8)
+
+The Build.exe located in the dist folder also runs the program. However, this lacks certain functionalities and isn't recommended.
 
 **Main Menu**
 ![menu](https://user-images.githubusercontent.com/43520641/117599176-35e32000-b141-11eb-87f5-36abcfa914ee.PNG)
