@@ -18,7 +18,7 @@ The following project uses machine learning to predict the results and scoreline
 1. Download all required software requirements
 2. Clone this repository
 3. git clone https://github.com/ElliotHoggard/FinalYearProject.git
-4. Download the live betting data available from the Google Drive link [link](https://drive.google.com/drive/folders/17G4Ipybt4XJ_EiGkWkl6vafQR2Nk7qH8).
+4. Download the live betting data available from the Google Drive link [(link)](https://drive.google.com/drive/folders/17G4Ipybt4XJ_EiGkWkl6vafQR2Nk7qH8).
 
 The Build.exe located in the dist folder also runs the program. However, this lacks certain functionalities and isn't recommended.
 
