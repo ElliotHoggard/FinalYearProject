@@ -1,5 +1,5 @@
 # Premier League Prediction System
-**A machine learning project that predicts Premier League Results and scorelines, modelling predominantly utilises regression techniques.**
+**A machine learning project that predicts Premier League results and scorelines, modelling predominantly utilises regression techniques.**
 
 **Project Description**
 
